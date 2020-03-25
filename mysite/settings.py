@@ -11,19 +11,27 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Load setting from environment
+
+env = environ.Env()
+path_env = os.path.join(BASE_DIR, 'dev.env')
+environ.Env.read_env(env_file=path_env)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'e0oks3oht#0mw58ez4j)jgx7i%)7a-8@fhu6pb5r9#&fv7-*1s'
+SECRET_KEY = env('SECRET_KEY')
+# 'e0oks3oht#0mw58ez4j)jgx7i%)7a-8@fhu6pb5r9#&fv7-*1s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -42,7 +50,8 @@ INSTALLED_APPS = [
     'django_extensions',
 
     # Local
-    'users',
+    'users.apps.UsersConfig',
+    'blog.apps.BlogConfig',
 ]
 
 MIDDLEWARE = [
