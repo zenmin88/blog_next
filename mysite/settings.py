@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
     # 3rd Part
     'django_extensions',
+    'taggit',
 
     # Local
     'users.apps.UsersConfig',
@@ -137,3 +138,13 @@ STATIC_URL = '/static/'
 # custom user model
 
 AUTH_USER_MODEL = 'users.CustomUser'
+
+# Email settings
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = env('gmail_user')
+EMAIL_HOST_PASSWORD = env('gmail_password')
